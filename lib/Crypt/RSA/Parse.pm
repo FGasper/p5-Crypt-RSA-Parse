@@ -346,6 +346,10 @@ sub find_or_die {
     Felipe M. L. Gasper
     CPAN ID: FELIPE
 
+=head1 REPOSITORY
+
+    https://github.com/FGasper/p5-Crypt-RSA-Parse
+
 =head1 COPYRIGHT
 
 This program is free software; you can redistribute
