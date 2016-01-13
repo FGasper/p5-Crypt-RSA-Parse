@@ -57,62 +57,9 @@ class, while private keys are represented via C<Crypt::RSA::Parse::Private>.
 
 =cut
 
+use Crypt::RSA::Parse::Utils ();
+
 our $BASE64_MODULE = 'MIME::Base64';
-
-#cf. RFC 3447 appendix A.1.1
-my $ASN1_TEMPLATE = q<
-
-      RSAPublicKey ::= SEQUENCE {
-          modulus           INTEGER,  -- n
-          publicExponent    INTEGER   -- e
-      }
-
-    -- FG: simplified from RFC for Convert::ASN1
-    Version ::= INTEGER
-
-    OtherPrimeInfo ::= SEQUENCE {
-        prime             INTEGER,  -- ri
-        exponent          INTEGER,  -- di
-        coefficient       INTEGER   -- ti
-    }
-
-    -- FG: simplified from RFC for Convert::ASN1
-    OtherPrimeInfos ::= SEQUENCE OF OtherPrimeInfo
-
-    RSAPrivateKey ::= SEQUENCE {
-        version           Version,
-        modulus           INTEGER,  -- n
-        publicExponent    INTEGER,  -- e
-        privateExponent   INTEGER,  -- d
-        prime1            INTEGER,  -- p
-        prime2            INTEGER,  -- q
-        exponent1         INTEGER,  -- d mod (p-1)
-        exponent2         INTEGER,  -- d mod (q-1)
-        coefficient       INTEGER,  -- (inverse of q) mod p
-        otherPrimeInfos   OtherPrimeInfos OPTIONAL
-    }
-
-    -- cf. RFC 3280 4.1.1.2
-    AlgorithmIdentifier  ::=  SEQUENCE  {
-        algorithm               OBJECT IDENTIFIER,
-        parameters              ANY DEFINED BY algorithm OPTIONAL
-    }
-
-    -- cf. RFC 5208 appendix A
-    PrivateKeyInfo ::= SEQUENCE {
-        version Version,
-        privateKeyAlgorithm AlgorithmIdentifier,
-        privateKey PrivateKey
-    }
-
-    PrivateKey ::= OCTET STRING
-
-    -- cf. RFC 3280 4.1
-    SubjectPublicKeyInfo  ::=  SEQUENCE  {
-        algorithm            AlgorithmIdentifier,
-        subjectPublicKey     BIT STRING
-    }
->;
 
 my $asn1;
 
@@ -129,7 +76,7 @@ sub _init {
 
     if ( !$asn1 ) {
         $asn1 = Crypt::RSA::Parse::Convert_ASN1->new();
-        $asn1->prepare_or_die($ASN1_TEMPLATE);
+        $asn1->prepare_or_die( Crypt::RSA::Parse::Utils::get_template('INTEGER') );
     }
 
     if ( $$pem_or_der_r =~ m<\A-> ) {
