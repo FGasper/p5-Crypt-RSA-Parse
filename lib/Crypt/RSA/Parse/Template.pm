@@ -1,4 +1,4 @@
-package Crypt::RSA::Parse::Utils;
+package Crypt::RSA::Parse::Template;
 
 #cf. RFC 3447 appendix A.1.1
 #
