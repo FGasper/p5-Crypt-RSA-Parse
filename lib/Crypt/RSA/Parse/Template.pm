@@ -2,24 +2,24 @@ package Crypt::RSA::Parse::Template;
 
 #cf. RFC 3447 appendix A.1.1
 #
-#replacing INTEGER with BIG_FAT_INTEGER to facilitate “lite” mode
+#replacing INTEGER with FG_FAUX_INTEGER to facilitate “lite” mode
 #which doesn’t bring in Math::BigInt.
 my $ASN1_TEMPLATE = q<
 
-    BIG_FAT_INTEGER ::= <WHAT_IS_BIG_FAT_INTEGER>
+    BIG_FAT_INTEGER ::= <WHAT_IS_FG_FAUX_INTEGER>
 
     RSAPublicKey ::= SEQUENCE {
-        modulus           BIG_FAT_INTEGER,  -- n
-        publicExponent    INTEGER   -- e
+        modulus           FG_FAUX_INTEGER,  -- n
+        publicExponent    FG_FAUX_INTEGER   -- e
     }
 
     -- FG: simplified from RFC for Convert::ASN1
     Version ::= INTEGER
 
     OtherPrimeInfo ::= SEQUENCE {
-        prime             BIG_FAT_INTEGER,  -- ri
-        exponent          BIG_FAT_INTEGER,  -- di
-        coefficient       BIG_FAT_INTEGER   -- ti
+        prime             FG_FAUX_INTEGER,  -- ri
+        exponent          FG_FAUX_INTEGER,  -- di
+        coefficient       FG_FAUX_INTEGER   -- ti
     }
 
     -- FG: simplified from RFC for Convert::ASN1
@@ -27,14 +27,14 @@ my $ASN1_TEMPLATE = q<
 
     RSAPrivateKey ::= SEQUENCE {
         version           Version,
-        modulus           BIG_FAT_INTEGER,  -- n
+        modulus           FG_FAUX_INTEGER,  -- n
         publicExponent    INTEGER,  -- e
-        privateExponent   BIG_FAT_INTEGER,  -- d
-        prime1            BIG_FAT_INTEGER,  -- p
-        prime2            BIG_FAT_INTEGER,  -- q
-        exponent1         BIG_FAT_INTEGER,  -- d mod (p-1)
-        exponent2         BIG_FAT_INTEGER,  -- d mod (q-1)
-        coefficient       BIG_FAT_INTEGER,  -- (inverse of q) mod p
+        privateExponent   FG_FAUX_INTEGER,  -- d
+        prime1            FG_FAUX_INTEGER,  -- p
+        prime2            FG_FAUX_INTEGER,  -- q
+        exponent1         FG_FAUX_INTEGER,  -- d mod (p-1)
+        exponent2         FG_FAUX_INTEGER,  -- d mod (q-1)
+        coefficient       FG_FAUX_INTEGER,  -- (inverse of q) mod p
         otherPrimeInfos   OtherPrimeInfos OPTIONAL
     }
 
@@ -64,7 +64,7 @@ sub get_template {
     my ($what_is_big_fat_int) = @_;
 
     my $template = $ASN1_TEMPLATE;
-    $template =~ s/<WHAT_IS_BIG_FAT_INTEGER>/$what_is_big_fat_int/;
+    $template =~ s/<WHAT_IS_FG_FAUX_INTEGER>/$what_is_big_fat_int/;
 
     return $template;
 }

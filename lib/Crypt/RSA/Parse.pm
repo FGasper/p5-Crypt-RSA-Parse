@@ -59,7 +59,8 @@ class, while private keys are represented via C<Crypt::RSA::Parse::Private>.
 
 use Crypt::Format ();
 
-use Crypt::RSA::Parse::Parser::MathBigInt ();
+use Crypt::RSA::Parse::Parser::Lite ();
+use Crypt::RSA::Parse::Parser::MathBigInt ();   #lazy-loads Math::BigInt only
 
 our $BASE64_MODULE = 'MIME::Base64';
 
@@ -67,6 +68,28 @@ my %parser;
 
 sub _MathBigInt {
     return $parser{'MathBigInt'} ||= Crypt::RSA::Parse::Parser::MathBigInt->new();
+}
+
+sub private {
+    return _MathBigInt()->private(@_);
+}
+
+sub public {
+    return _MathBigInt()->public(@_);
+}
+
+sub private_pkcs8 {
+    return _MathBigInt()->private_pkcs8(@_);
+}
+
+sub public_pkcs8 {
+    return _MathBigInt()->public_pkcs8(@_);
+}
+
+#----------------------------------------------------------------------
+
+sub _MathBigInt {
+    return $parser{'Lite'} ||= Crypt::RSA::Parse::Parser::Lite->new();
 }
 
 sub private {
