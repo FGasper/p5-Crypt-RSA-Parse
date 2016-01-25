@@ -6,7 +6,7 @@ package Crypt::RSA::Parse::Template;
 #which doesn’t bring in Math::BigInt.
 my $ASN1_TEMPLATE = q<
 
-    BIG_FAT_INTEGER ::= <WHAT_IS_FG_FAUX_INTEGER>
+    FG_FAUX_INTEGER ::= <WHAT_IS_FG_FAUX_INTEGER>
 
     RSAPublicKey ::= SEQUENCE {
         modulus           FG_FAUX_INTEGER,  -- n
