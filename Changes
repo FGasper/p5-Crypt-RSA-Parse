@@ -7,4 +7,7 @@ Revision history for Perl module Crypt::RSA::Parse
     - Avoid string eval() every time we parse.
 
 0.03 Mon Jan 25 11:28:00 2016
-    - Replace Mo with Class::Accessor::Fast
+    - Replace Mo with Class::Accessor::Fast.
+
+0.04 Mon Jan 25 11:43:00 2016
+    - Fix errant inclusion of preliminary “Lite” work.
