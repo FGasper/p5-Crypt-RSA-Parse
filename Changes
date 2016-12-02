@@ -12,5 +12,8 @@ Revision history for Perl module Crypt::RSA::Parse
 0.04 Mon Jan 25 11:43:00 2016
     - Fix errant inclusion of preliminary “Lite” work.
 
-0.042 Fri Dec  2
+0.042 Fri Dec  2 2016
     - Add N(), E(), D(), P(), Q(), DP(), DQ(), and QINV() accessors
+
+0.043 Fri Dec  2 2016
+    - Fix missing parent.pm dependency

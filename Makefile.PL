@@ -12,6 +12,7 @@ WriteMakefile(
         'Crypt::Format'         => 0.06,
         'MIME::Base64'          => 3.15,
         'Class::Accessor::Fast' => 0.34,
+        'parent'                => 0,
     },
     TEST_REQUIRES => {
         'Test::Simple' => 0.44,
