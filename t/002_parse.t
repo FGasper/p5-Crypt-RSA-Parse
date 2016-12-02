@@ -3,7 +3,7 @@
 # t/002_parse.t - check parsing
 
 use Test::NoWarnings;
-use Test::More tests => 1 + 65;
+use Test::More tests => 1 + 115;
 
 use MIME::Base64 ();
 
