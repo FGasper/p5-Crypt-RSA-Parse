@@ -3,7 +3,7 @@ package Crypt::RSA::Parse;
 use strict;
 use warnings;
 
-our $VERSION = 0.041;
+our $VERSION = 0.042;
 
 =pod
 
@@ -19,21 +19,21 @@ Crypt::RSA::Parse - Parse RSA keys
     my $public_rsa = Crypt::RSA::Parse::public($key_str);
     my $private_rsa = Crypt::RSA::Parse::private($private_key_str);
 
-    $public_rsa->exponent();
-    $public_rsa->modulus();     #isa Math::BigInt
+    $public_rsa->exponent();    #alias E()
+    $public_rsa->modulus();     #isa Math::BigInt, alias N()
     $public_rsa->size();        #i.e., the modulus length in bits
 
     $private_rsa->version();        #usually 0
-    $private_rsa->modulus();        #isa Math::BigInt
+    $private_rsa->modulus();        #isa Math::BigInt, alias N()
     $private_rsa->size();           #i.e., the modulus length in bits
 
-    $private_rsa->publicExponent();     #same as “exponent” on public keys
-    $private_rsa->privateExponent();    #isa Math::BigInt
-    $private_rsa->prime1();             #isa Math::BigInt
-    $private_rsa->prime2();             #isa Math::BigInt
-    $private_rsa->exponent1();          #isa Math::BigInt
-    $private_rsa->exponent2();          #isa Math::BigInt
-    $private_rsa->coefficient();        #isa Math::BigInt
+    $private_rsa->publicExponent();     #same as public “exponent”, alias E()
+    $private_rsa->privateExponent();    #isa Math::BigInt, alias D()
+    $private_rsa->prime1();             #isa Math::BigInt, alias P()
+    $private_rsa->prime2();             #isa Math::BigInt, alias Q()
+    $private_rsa->exponent1();          #isa Math::BigInt, alias DP()
+    $private_rsa->exponent2();          #isa Math::BigInt, alias DQ()
+    $private_rsa->coefficient();        #isa Math::BigInt, alias QINV()
 
     #Only checks PKCS8 (DER or PEM)
     $public_rsa = Crypt::RSA::Parse::public_pkcs8($pkcs8_str);
