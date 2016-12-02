@@ -2,7 +2,11 @@ package Crypt::RSA::Parse::KeyBase;
 
 use parent qw(Class::Accessor::Fast);
 
-__PACKAGE__->mk_ro_accessors('modulus');
+BEGIN {
+    __PACKAGE__->mk_ro_accessors('modulus');
+
+    *N = \&modulus;
+}
 
 sub size {
     my ($self) = @_;

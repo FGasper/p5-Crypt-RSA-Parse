@@ -4,6 +4,10 @@ use parent qw(Crypt::RSA::Parse::KeyBase);
 
 use parent qw(Class::Accessor::Fast);
 
-__PACKAGE__->mk_ro_accessors('exponent');
+BEGIN {
+    __PACKAGE__->mk_ro_accessors('exponent');
+
+    *E = \&exponent;
+}
 
 1;

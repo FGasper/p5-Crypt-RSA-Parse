@@ -101,8 +101,12 @@ sub verify_public {
     my ($rsa_pub) = @_;
 
     is( $rsa_pub->modulus()->as_hex(), "0x$modulus_hex", 'modulus' );
+    is( $rsa_pub->N()->as_hex(), "0x$modulus_hex", 'modulus, called N()' );
+
     is( $rsa_pub->size(),              $modulus_bits,    'size (i.e., modulus length)' );
+
     is( $rsa_pub->exponent(),          $exponent,        'exponent' );
+    is( $rsa_pub->E(),          $exponent,        'exponent, called E()' );
 }
 
 for my $pub_pem ( $rsa_public_key, $pkcs8_public_key ) {
@@ -132,13 +136,24 @@ sub verify_private {
     my ($rsa) = @_;
 
     is( $rsa->modulus()->as_hex(), "0x$modulus_hex", 'modulus' );
+    is( $rsa->N()->as_hex(), "0x$modulus_hex", 'modulus, called N()' );
 
     is( $rsa->size(),    $modulus_bits, 'size (i.e., modulus length)' );
     is( $rsa->version(), 0,             'version' );
 
     is( $rsa->publicExponent(), $exponent, 'publicExponent' );
+    is( $rsa->E(), $exponent, 'public exponent, called E()' );
 
-    for my $m (qw( privateExponent  prime1  prime2  exponent1  exponent2  coefficient )) {
+    my @to_check = qw(
+        privateExponent     D
+        prime1              P
+        prime2              Q
+        exponent1           DP
+        exponent2           DQ
+        coefficient         QINV
+    );
+
+    for my $m (@to_check) {
         isa_ok( $rsa->$m(), 'Math::BigInt', $m );
     }
 
