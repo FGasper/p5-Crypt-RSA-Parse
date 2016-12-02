@@ -7,6 +7,7 @@ WriteMakefile(
     VERSION_FROM => 'lib/Crypt/RSA/Parse.pm',    # finds \$VERSION
     AUTHOR       => 'Felipe Gasper (FELIPE)',
     ABSTRACT     => 'Parse RSA keys',
+    LICENSE      => 'perl',
     PREREQ_PM    => {
         'Convert::ASN1'         => 0.27,
         'Crypt::Format'         => 0.06,
